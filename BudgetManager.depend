@@ -1,0 +1,30 @@
+# depslib dependency file v1.0
+1723307800 source:c:\projects\budgetmanager\budgetmanager.cpp
+	"BudgetManager.h"
+
+1723306360 c:\projects\budgetmanager\budgetmanager.h
+
+1723311434 source:c:\projects\budgetmanager\main.cpp
+	<iostream>
+	"UserManager.h"
+
+1723311688 c:\projects\budgetmanager\usermanager.h
+	<iostream>
+	<vector>
+	"User.h"
+
+1723308238 c:\projects\budgetmanager\user.h
+	<iostream>
+	<string>
+
+1723311788 source:c:\projects\budgetmanager\usermanager.cpp
+	"UserManager.h"
+	"Utils.h"
+
+1723309172 source:c:\projects\budgetmanager\utils.cpp
+	"Utils.h"
+
+1723309137 c:\projects\budgetmanager\utils.h
+	<iostream>
+	<sstream>
+
