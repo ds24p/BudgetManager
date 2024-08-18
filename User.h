@@ -1,3 +1,6 @@
+#ifndef USER_H
+#define USER_H
+
 #include <iostream>
 #include <string>
 
@@ -10,3 +13,5 @@ struct User{
     string login;
     string password;
 };
+
+#endif

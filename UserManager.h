@@ -5,18 +5,21 @@
 #include <vector>
 
 #include "User.h"
+#include "UserFile.h"
 
 
 class UserManager{
     int loggedUserId;
     vector <User> users;
-    //UserFile userFile;
+    UserFile userFile;
     bool checkIfLoginExist(const string &login);
     User enterUserData();
-//- findUserByLogin(const string &login, vector <User>::iterator &itr) : void
-//- findUserById(vector <User>::iterator& itr) : void
+
 public:
     //UserManager (string userFileName)
+    UserManager(){
+        this->users = userFile.loadUsersFromFile();
+        this->setLoggedUserId(0);}
     void registerUser();
     void loginUser();
     void changeUserPassword();
@@ -24,6 +27,7 @@ public:
     bool isUserLoggedIn();
     int getLoggedUserId();
     void setLoggedUserId(int id);
+    void printAllUsers(vector <User> users);
 };
 
 #endif

@@ -1,23 +1,34 @@
+#include "BudgetMainApp.h"
 
-
-class BudgetMainApp
+bool BudgetMainApp::isUserLoggedIn()
 {
-    UserManager userManager;
-    //BudgetManager *budgetManager;
-    const string INCOME_FILE_NAME;
-    const string EXPENSE_FILE_NAME;
+    return userManager.isUserLoggedIn();
+}
 
-public:
-    //BudgetMainApp (string userFileName, string incomeFileName, string expenseFileName);
-    bool isUserLoggedIn();
-    void registerUser();
-    void loginUser();
-    void changeUserPassword();
-    void logoutUser();
-    //void addIncome();
-   // void addExpense();
-   // void showCurrentMonthBalance();
-   // void showPreviousMonthBalance();
-   // void showCustomPeriodBalance();
+void BudgetMainApp::registerUser()
+{
+    cout << "User registration" << endl;
+    userManager.registerUser();
+}
 
-};
+void BudgetMainApp::loginUser()
+{
+    if(!isUserLoggedIn())
+    {
+        cout << "User login" << endl;
+        userManager.loginUser();
+    }
+}
+
+void BudgetMainApp::changeUserPassword()
+{
+    userManager.changeUserPassword();
+}
+
+void BudgetMainApp::logoutUser()
+{
+    if(isUserLoggedIn())
+    {
+        userManager.logoutUser();
+    }
+}
