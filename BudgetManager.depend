@@ -1,23 +1,26 @@
 # depslib dependency file v1.0
-1723307800 source:c:\projects\budgetmanager\budgetmanager.cpp
-	"BudgetManager.h"
+1723970845 source:c:\projects\budgetmanager\budgetmanager.cpp
 
-1723306360 c:\projects\budgetmanager\budgetmanager.h
-
-1723311434 source:c:\projects\budgetmanager\main.cpp
-	<iostream>
+1723490845 c:\projects\budgetmanager\budgetmanager.h
 	"UserManager.h"
+	<string>
+	<iostream>
 
-1723311688 c:\projects\budgetmanager\usermanager.h
+1723970639 source:c:\projects\budgetmanager\main.cpp
+	<iostream>
+	"BudgetMainApp.h"
+
+1723489892 c:\projects\budgetmanager\usermanager.h
 	<iostream>
 	<vector>
 	"User.h"
+	"UserFile.h"
 
-1723308238 c:\projects\budgetmanager\user.h
+1723486139 c:\projects\budgetmanager\user.h
 	<iostream>
 	<string>
 
-1723311788 source:c:\projects\budgetmanager\usermanager.cpp
+1723490133 source:c:\projects\budgetmanager\usermanager.cpp
 	"UserManager.h"
 	"Utils.h"
 
@@ -27,4 +30,35 @@
 1723309137 c:\projects\budgetmanager\utils.h
 	<iostream>
 	<sstream>
+
+1723486904 c:\projects\budgetmanager\userfile.h
+	"Markup.h"
+	"User.h"
+	<vector>
+	<string>
+
+1721924468 c:\projects\budgetmanager\markup.h
+	<stdlib.h>
+	<string.h>
+	<string>
+	<afx.h>
+
+1721924468 source:c:\projects\budgetmanager\markup.cpp
+	<stdio.h>
+	"Markup.h"
+	<errno.h>
+	<iconv.h>
+	<windows.h>
+	<mbstring.h>
+
+1723490207 source:c:\projects\budgetmanager\userfile.cpp
+	"UserFile.h"
+
+1723970845 c:\projects\budgetmanager\budgetmainapp.h
+	"UserManager.h"
+	<string>
+	<iostream>
+
+1723971482 source:c:\projects\budgetmanager\budgetmainapp.cpp
+	"BudgetMainApp.h"
 

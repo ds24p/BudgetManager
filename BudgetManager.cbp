@@ -37,8 +37,11 @@
 		<Unit filename="BudgetManager.h" />
 		<Unit filename="DateMethods.h" />
 		<Unit filename="File.h" />
+		<Unit filename="Markup.cpp" />
+		<Unit filename="Markup.h" />
 		<Unit filename="OperationFile.h" />
 		<Unit filename="User.h" />
+		<Unit filename="UserFile.cpp" />
 		<Unit filename="UserFile.h" />
 		<Unit filename="UserManager.cpp" />
 		<Unit filename="UserManager.h" />

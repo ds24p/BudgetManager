@@ -4,8 +4,7 @@
 User UserManager::enterUserData()
 {
     User newUser;
-    newUser.id = Utils::getCharacter();
-    //newUser.id = determine usersId
+    newUser.id = users.size() + 1;
     newUser.firstName = Utils::readLine();
     newUser.lastName = Utils::readLine();
     string login;
@@ -22,10 +21,9 @@ User UserManager::enterUserData()
 void UserManager::registerUser(){
 
     User newUser = enterUserData();
-    //newUser.id = determine usersId
 
     users.push_back(newUser);
-    //zapisz uzytkownika do pliku uzytkownicy xml
+    userFile.addUserToFile(newUser);
 
     cout << "User successfully registered." << endl;
 ;}
@@ -70,10 +68,7 @@ void UserManager::changeUserPassword(){
     }
 
     cout << "Password successfully changed" << endl;
-
-
-
-    //aktualizacja pliku xml
+    userFile.changePasswordInFile(loggedUserId, password);
 }
 
 void UserManager::logoutUser()
@@ -107,4 +102,14 @@ bool UserManager::checkIfLoginExist(const string &login)
         }
     }
     return false;
+}
+
+void UserManager::printAllUsers(vector <User> users)
+{
+    for (int i = 0; i < users.size(); i++)
+    {
+        cout << users[i].id << endl;
+        cout << users[i].login << endl;
+        cout << users[i].password << endl;
+    }
 }
