@@ -2,6 +2,7 @@
 #define BUDGETMAINAPP_H
 
 #include "UserManager.h"
+#include "BudgetManager.h"
 #include <string>
 #include <iostream>
 

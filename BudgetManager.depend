@@ -1,49 +1,56 @@
 # depslib dependency file v1.0
-1723970845 source:c:\projects\budgetmanager\budgetmanager.cpp
+1724088476 source:c:\projects\budgetmanager\budgetmanager.cpp
+	"BudgetManager.h"
 
-1723490845 c:\projects\budgetmanager\budgetmanager.h
-	"UserManager.h"
-	<string>
+1724085564 c:\projects\budgetmanager\budgetmanager.h
 	<iostream>
+	<vector>
+	<string>
+	<algorithm>
+	"Operation.h"
+	"OperationFile.h"
+	"DateMethods.h"
+	"Utils.h"
 
-1723970639 source:c:\projects\budgetmanager\main.cpp
+1724088488 source:c:\projects\budgetmanager\main.cpp
 	<iostream>
 	"BudgetMainApp.h"
+	"BudgetManager.h"
 
-1723489892 c:\projects\budgetmanager\usermanager.h
+1723973248 c:\projects\budgetmanager\usermanager.h
 	<iostream>
 	<vector>
 	"User.h"
 	"UserFile.h"
 
-1723486139 c:\projects\budgetmanager\user.h
+1723973248 c:\projects\budgetmanager\user.h
 	<iostream>
 	<string>
 
-1723490133 source:c:\projects\budgetmanager\usermanager.cpp
+1723973248 source:c:\projects\budgetmanager\usermanager.cpp
 	"UserManager.h"
 	"Utils.h"
 
-1723309172 source:c:\projects\budgetmanager\utils.cpp
+1724088175 source:c:\projects\budgetmanager\utils.cpp
 	"Utils.h"
 
-1723309137 c:\projects\budgetmanager\utils.h
+1724088189 c:\projects\budgetmanager\utils.h
 	<iostream>
 	<sstream>
 
-1723486904 c:\projects\budgetmanager\userfile.h
+1723973248 c:\projects\budgetmanager\userfile.h
 	"Markup.h"
 	"User.h"
 	<vector>
 	<string>
 
-1721924468 c:\projects\budgetmanager\markup.h
+1723973248 c:\projects\budgetmanager\markup.h
 	<stdlib.h>
 	<string.h>
 	<string>
 	<afx.h>
 
-1721924468 source:c:\projects\budgetmanager\markup.cpp
+1723973248 source:c:\projects\budgetmanager\markup.cpp
 	<stdio.h>
 	"Markup.h"
 	<errno.h>
@@ -51,14 +58,31 @@
 	<windows.h>
 	<mbstring.h>
 
-1723490207 source:c:\projects\budgetmanager\userfile.cpp
+1723973248 source:c:\projects\budgetmanager\userfile.cpp
 	"UserFile.h"
 
-1723970845 c:\projects\budgetmanager\budgetmainapp.h
+1724081086 c:\projects\budgetmanager\budgetmainapp.h
 	"UserManager.h"
+	"BudgetManager.h"
 	<string>
 	<iostream>
 
-1723971482 source:c:\projects\budgetmanager\budgetmainapp.cpp
+1723973248 source:c:\projects\budgetmanager\budgetmainapp.cpp
 	"BudgetMainApp.h"
+
+1724082849 c:\projects\budgetmanager\operation.h
+	<string>
+
+1723977229 c:\projects\budgetmanager\operationfile.h
+
+1724086967 c:\projects\budgetmanager\datemethods.h
+	<map>
+	<iostream>
+	<ctime>
+	<iomanip>
+	<string>
+	<cstdlib>
+
+1724087459 source:c:\projects\budgetmanager\datemethods.cpp
+	"DateMethods.h"
 

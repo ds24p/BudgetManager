@@ -28,3 +28,13 @@ char Utils::getCharacter()
 
     return inputChar;
 }
+
+bool Utils::isValidDouble(const string& str)
+{
+    if (str.empty()) return false;
+
+    char* end = nullptr;
+    strtod(str.c_str(), &end);
+
+    return (*end == '\0');
+}
