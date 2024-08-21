@@ -100,6 +100,6 @@ void BudgetManager::addExpense()
     }
     double amount = stod(inputAmount);
 
-    //zapisz do pliku
+    expenseFile.addOperationToFile(expense);
     expenses.push_back(expense);
 }

@@ -30,6 +30,12 @@ class BudgetManager{
 
 public:
 // BudgetManager (string incomeFileName, string expenseFileName, int loggedUserId)
+    BudgetManager()
+    {
+
+        this->incomes = incomeFile.loadOperationsFromFile(1); //zmienic na logged userID i przeniesc do konstruktora OperationFile
+        this->expenses = expenseFile.loadOperationsFromFile(1);
+    }
     void addIncome();
     void addExpense();
     void showCurrentMonthBalance();

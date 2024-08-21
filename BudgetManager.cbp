@@ -42,6 +42,7 @@
 		<Unit filename="Markup.cpp" />
 		<Unit filename="Markup.h" />
 		<Unit filename="Operation.h" />
+		<Unit filename="OperationFile.cpp" />
 		<Unit filename="OperationFile.h" />
 		<Unit filename="User.h" />
 		<Unit filename="UserFile.cpp" />
