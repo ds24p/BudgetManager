@@ -10,7 +10,7 @@ class Utils{
 public:
     static char getCharacter();
     static string readLine();
-    static bool validateInput(string input);
+    static bool isValidDouble(const string& str);
 };
 
 #endif
