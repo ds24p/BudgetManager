@@ -19,7 +19,7 @@ enum Type{
 
 
 class BudgetManager{
-    //const int LOGGED_USER_ID;
+    const int LOGGED_USER_ID;
     OperationFile incomeFile;
     OperationFile expenseFile;
     vector <Operation> incomes;
@@ -29,13 +29,12 @@ class BudgetManager{
     double calculateBalance(int startDate, int endDate, const Type &type);
 
 public:
-// BudgetManager (string incomeFileName, string expenseFileName, int loggedUserId)
-    BudgetManager()
+    BudgetManager (string incomeFileName, string expenseFileName, int loggedUserId) : incomeFile(incomeFileName), expenseFile(expenseFileName), LOGGED_USER_ID(loggedUserId)
     {
 
-        this->incomes = incomeFile.loadOperationsFromFile(1); //zmienic na logged userID i przeniesc do konstruktora OperationFile
-        this->expenses = expenseFile.loadOperationsFromFile(1);
-    }
+        this->incomes = incomeFile.loadOperationsFromFile(LOGGED_USER_ID); //zmienic na logged userID i przeniesc do konstruktora OperationFile
+        this->expenses = expenseFile.loadOperationsFromFile(LOGGED_USER_ID);
+    };
     void addIncome();
     void addExpense();
     void showCurrentMonthBalance();

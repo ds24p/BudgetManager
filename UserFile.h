@@ -3,16 +3,17 @@
 
 #include "Markup.h"
 #include "User.h"
+#include "File.h"
 #include <vector>
-//#include <iostream>
 #include <string>
 
 using namespace std;
 
-class UserFile{
+class UserFile : public File
+{
 
 public:
-    //UserFile (string userFileName);
+    UserFile (string userFileName) : File(userFileName){};
     vector <User> loadUsersFromFile();
     bool addUserToFile (const User &user);
     bool changePasswordInFile(int id, const string &password);

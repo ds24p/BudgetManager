@@ -3,10 +3,9 @@
 bool OperationFile::addOperationToFile (const Operation &operation)
 {
     CMarkup xml;
-    string filename = "incomes.xml";
 
-    if (!xml.Load(filename)) {
-        cout << "File not found, creating new one: " << filename << endl;
+    if (!xml.Load(getFileName())) {
+        cout << "File not found, creating new one: " << getFileName() << endl;
         xml.AddElem("operations");
     }
 
@@ -24,8 +23,10 @@ bool OperationFile::addOperationToFile (const Operation &operation)
 
     xml.OutOfElem();
 
-    if (!xml.Save(filename)) {
-        cout << "Error saving file: " << filename << endl;
+    setLastId(operation.id);
+
+    if (!xml.Save(getFileName())) {
+        cout << "Error saving file: " << getFileName() << endl;
         return false;
     }
 
@@ -36,10 +37,9 @@ vector <Operation> OperationFile::loadOperationsFromFile(const int loggedUserId)
 {
     vector <Operation> operations;
     CMarkup xml;
-    string filename = "incomes.xml";
 
-    if (!xml.Load(filename)) {
-        cout << "Failed to load file: " << filename << endl;
+    if (!xml.Load(getFileName())) {
+        cout << "Failed to load file: " << getFileName() << endl;
         cout << "(Probably no registered operations so far)." << endl;
         return operations;
     }
@@ -47,6 +47,7 @@ vector <Operation> OperationFile::loadOperationsFromFile(const int loggedUserId)
     xml.FindElem();
     xml.IntoElem();
 
+    int previousId = 0;
 
     while (xml.FindElem("operation")) {
         Operation operation;
@@ -55,6 +56,7 @@ vector <Operation> OperationFile::loadOperationsFromFile(const int loggedUserId)
 
         xml.FindElem("id");
         operation.id = stoi(xml.GetData());
+        previousId = operation.id;
 
         xml.FindElem("userId");
         operation.userId = stoi(xml.GetData());
@@ -70,7 +72,12 @@ vector <Operation> OperationFile::loadOperationsFromFile(const int loggedUserId)
 
         xml.OutOfElem();
 
-        operations.push_back(operation);
+        if(operation.userId == loggedUserId)
+        {
+            operations.push_back(operation);
+        }
+
+        setLastId(previousId);
     }
 
     return operations;

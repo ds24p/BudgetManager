@@ -23,7 +23,7 @@ char Utils::getCharacter()
             inputChar = ciagZnakow[0];
             break;
         }
-        cout << "To nie jest pojedynczy znak, sproboj ponownie." << endl;
+        cout << "This is not a single character, try again." << endl;
     }
 
     return inputChar;
@@ -37,4 +37,28 @@ bool Utils::isValidDouble(const string& str)
     strtod(str.c_str(), &end);
 
     return (*end == '\0');
+}
+
+void Utils::displayMainMenu()
+{
+    cout << "BUDGET MANAGER - MAIN MENU" << endl;
+    cout << "--------------------------" << endl;
+    cout << "Choose the option: " << endl;
+    cout << "   1. Login User" << endl;
+    cout << "   2. Register new User" << endl;
+    cout << "   3. Termination of the programme" << endl;
+}
+
+void Utils::displayUserMenu()
+{
+    cout << "BUDGET MANAGER - USER MENU" << endl;
+    cout << "--------------------------" << endl;
+    cout << "Choose the option: " << endl;
+    cout << "   1. Add income" << endl;
+    cout << "   2. Add expense" << endl;
+    cout << "   3. Show current month balance" << endl;
+    cout << "   4. Show previous month balance" << endl;
+    cout << "   5. Show custom period balance" << endl;
+    cout << "   6. Change user password" << endl;
+    cout << "   9. Log out" << endl;
 }

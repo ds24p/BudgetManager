@@ -5,8 +5,8 @@ void BudgetManager::addIncome()
     Operation income;
     DateMethods methods;
 
-    income.id = 1; // sprawdzanie ostatniego id w wektorze
-    income.userId = 1;//LOGGED_USER_ID;
+    income.id = incomeFile.getLastId() + 1;
+    income.userId = LOGGED_USER_ID;
     int date;
     string sDate;
     cout << "Adding a new income..." << endl;
@@ -48,7 +48,7 @@ void BudgetManager::addIncome()
     }
     double amount = stod(inputAmount);
 
-    //zapisz do pliku
+    incomeFile.addOperationToFile(income);
     incomes.push_back(income);
 }
 
@@ -57,8 +57,8 @@ void BudgetManager::addExpense()
     Operation expense;
     DateMethods methods;
 
-    expense.id = 1; // sprawdzanie ostatniego id w wektorze
-    expense.userId = 1;//LOGGED_USER_ID;
+    expense.id = expenseFile.getLastId() + 1;
+    expense.userId = LOGGED_USER_ID;
     int date;
     string sDate;
     cout << "Adding a new expense..." << endl;
@@ -102,4 +102,18 @@ void BudgetManager::addExpense()
 
     expenseFile.addOperationToFile(expense);
     expenses.push_back(expense);
+}
+
+void BudgetManager::showCurrentMonthBalance()
+{
+    ;
+}
+
+void BudgetManager::showPreviousMonthBalance()
+{
+    ;
+}
+void BudgetManager::showCustomPeriodBalance()
+{
+    ;
 }
