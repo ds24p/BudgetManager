@@ -16,10 +16,11 @@ class UserManager{
     User enterUserData();
 
 public:
-    //UserManager (string userFileName)
-    UserManager(){
-        this->users = userFile.loadUsersFromFile();
-        this->setLoggedUserId(0);}
+
+    UserManager(string userFileName) : userFile(userFileName) {
+        loggedUserId = 0;
+        users = userFile.loadUsersFromFile();
+        };
     void registerUser();
     void loginUser();
     void changeUserPassword();

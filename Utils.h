@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <windows.h>
 
 using namespace std;
 
@@ -11,6 +12,8 @@ public:
     static char getCharacter();
     static string readLine();
     static bool isValidDouble(const string& str);
+    static void displayMainMenu();
+    static void displayUserMenu();
 };
 
 #endif

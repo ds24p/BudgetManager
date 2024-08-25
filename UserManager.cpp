@@ -42,6 +42,7 @@ void UserManager::loginUser()
                         {
                             loggedUserId = users[i].id;
                             cout << "User logged in" << endl;
+
                         }
                         else{
                             cout << "Wrong password" << endl;

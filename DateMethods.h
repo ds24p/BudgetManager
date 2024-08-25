@@ -8,6 +8,8 @@
 #include <string>
 #include <cstdlib>
 
+#include "Operation.h"
+
 using namespace std;
 
 class DateMethods{
@@ -21,6 +23,7 @@ public:
     string convertIntDateToStringWithDashes(int dateAsInt);
     int getCurrentDate();
     int getCurrentMonthFirstDayDate();
+    int getCurrentMonthLastDayDate();
     int getPreviousMonthLastDayDate();
     int getPreviousMonthFirstDayDate();
     int calculateDaysInMonth(int year, int month);

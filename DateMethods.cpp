@@ -35,11 +35,74 @@ int DateMethods::getCurrentDate()
                       (local_time->tm_mon + 1) * 100 +
                       local_time->tm_mday;
 
-    cout << "Today's date: " << put_time(local_time, "%Y-%m-%d") << endl;
-
+    //cout << "Today's date: " << put_time(local_time, "%Y-%m-%d") << endl;
+    //cout << "getcurrentdate" << endl;
     return currentDate;
 }
 
+int DateMethods::getCurrentMonthFirstDayDate()
+{
+    time_t now = time(nullptr);
+    tm* local_time = localtime(&now);
+
+    local_time->tm_mday = 01;
+
+    int currentMonthFirstDay = (local_time->tm_year + 1900) * 10000 +
+                      (local_time->tm_mon + 1) * 100 + local_time->tm_mday;
+
+    //cout << "First day of current month: " << currentMonthFirstDay << endl;
+    //cout << "getCurrentMonthFirstDayDate" << endl;
+
+    return currentMonthFirstDay;
+}
+
+int DateMethods::getCurrentMonthLastDayDate()
+{
+    time_t now = time(nullptr);
+    tm* local_time = localtime(&now);
+
+    local_time->tm_mday = calculateDaysInMonth(local_time->tm_year + 1900, local_time->tm_mon + 1);
+
+    int currentMonthLastDay = (local_time->tm_year + 1900) * 10000 +
+                      (local_time->tm_mon + 1) * 100 + local_time->tm_mday;
+
+    //cout << "Last day of current month: " << currentMonthLastDay << endl;
+    //cout << "getCurrentMonthLastDayDate" << endl;
+
+    return currentMonthLastDay;
+}
+
+int DateMethods::getPreviousMonthFirstDayDate()
+{
+    time_t now = time(nullptr);
+    tm* local_time = localtime(&now);
+
+    local_time->tm_mday = 01;
+
+    int previousMonthFirstDay = (local_time->tm_year + 1900) * 10000 +
+                      (local_time->tm_mon) * 100 + local_time->tm_mday;
+
+    //cout << "First day of previous month: " << previousMonthFirstDay << endl;
+    //cout << "previousMonthFirstDay" << endl;
+
+    return previousMonthFirstDay;
+}
+
+int DateMethods::getPreviousMonthLastDayDate()
+{
+    time_t now = time(nullptr);
+    tm* local_time = localtime(&now);
+
+    local_time->tm_mday = calculateDaysInMonth(local_time->tm_year + 1900, local_time->tm_mon);
+
+    int previousMonthLastDay = (local_time->tm_year + 1900) * 10000 +
+                      (local_time->tm_mon) * 100 + local_time->tm_mday;
+
+    //cout << "Last day of current month: " << previousMonthLastDay << endl;
+    //cout << "previousMonthLastDay" << endl;
+
+    return previousMonthLastDay;
+}
 
 int DateMethods::calculateDaysInMonth(int year, int month)
 {
