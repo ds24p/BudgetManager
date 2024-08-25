@@ -41,6 +41,7 @@ bool Utils::isValidDouble(const string& str)
 
 void Utils::displayMainMenu()
 {
+    system("cls");
     cout << "BUDGET MANAGER - MAIN MENU" << endl;
     cout << "--------------------------" << endl;
     cout << "Choose the option: " << endl;
@@ -51,6 +52,7 @@ void Utils::displayMainMenu()
 
 void Utils::displayUserMenu()
 {
+    system("cls");
     cout << "BUDGET MANAGER - USER MENU" << endl;
     cout << "--------------------------" << endl;
     cout << "Choose the option: " << endl;

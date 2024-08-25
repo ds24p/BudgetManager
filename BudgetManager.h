@@ -8,9 +8,12 @@
 
 #include "Operation.h"
 #include "OperationFile.h"
+#include "File.h"
 #include "DateMethods.h"
 #include "Utils.h"
 
+
+using namespace std;
 
 enum Type{
     INCOME,
@@ -32,7 +35,7 @@ public:
     BudgetManager (string incomeFileName, string expenseFileName, int loggedUserId) : incomeFile(incomeFileName), expenseFile(expenseFileName), LOGGED_USER_ID(loggedUserId)
     {
 
-        this->incomes = incomeFile.loadOperationsFromFile(LOGGED_USER_ID); //zmienic na logged userID i przeniesc do konstruktora OperationFile
+        this->incomes = incomeFile.loadOperationsFromFile(LOGGED_USER_ID); //przeniesc do konstruktora OperationFile
         this->expenses = expenseFile.loadOperationsFromFile(LOGGED_USER_ID);
     };
     void addIncome();

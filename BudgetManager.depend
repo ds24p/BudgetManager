@@ -1,18 +1,19 @@
 # depslib dependency file v1.0
-1724500151 source:c:\projects\budgetmanager\budgetmanager.cpp
+1724592077 source:c:\projects\budgetmanager\budgetmanager.cpp
 	"BudgetManager.h"
 
-1724496199 c:\projects\budgetmanager\budgetmanager.h
+1724585685 c:\projects\budgetmanager\budgetmanager.h
 	<iostream>
 	<vector>
 	<string>
 	<algorithm>
 	"Operation.h"
 	"OperationFile.h"
+	"File.h"
 	"DateMethods.h"
 	"Utils.h"
 
-1724499375 source:c:\projects\budgetmanager\main.cpp
+1724592183 source:c:\projects\budgetmanager\main.cpp
 	<iostream>
 	"BudgetMainApp.h"
 	"OperationFile.h"
@@ -31,12 +32,13 @@
 	"UserManager.h"
 	"Utils.h"
 
-1724500279 source:c:\projects\budgetmanager\utils.cpp
+1724592411 source:c:\projects\budgetmanager\utils.cpp
 	"Utils.h"
 
-1724498893 c:\projects\budgetmanager\utils.h
+1724592411 c:\projects\budgetmanager\utils.h
 	<iostream>
 	<sstream>
+	<windows.h>
 
 1724497806 c:\projects\budgetmanager\userfile.h
 	"Markup.h"
@@ -81,21 +83,22 @@
 	"Markup.h"
 	"File.h"
 
-1724273129 c:\projects\budgetmanager\datemethods.h
+1724588487 c:\projects\budgetmanager\datemethods.h
 	<map>
 	<iostream>
 	<ctime>
 	<iomanip>
 	<string>
 	<cstdlib>
+	"Operation.h"
 
-1724273129 source:c:\projects\budgetmanager\datemethods.cpp
+1724592241 source:c:\projects\budgetmanager\datemethods.cpp
 	"DateMethods.h"
 
 1724500441 source:c:\projects\budgetmanager\operationfile.cpp
 	"OperationFile.h"
 
-1724500383 c:\projects\budgetmanager\file.h
+1724503914 c:\projects\budgetmanager\file.h
 	<string>
 	<iostream>
 

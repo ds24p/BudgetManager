@@ -9,11 +9,11 @@ using namespace std;
 class File{
 
     const string FILE_NAME;
-    int lastId;
 
 public:
     File (string fileName) : FILE_NAME(fileName){};
 
+    int lastId;
     string getFileName();
     int getLastId();
     void setLastId(int id);
