@@ -35,8 +35,7 @@ int DateMethods::getCurrentDate()
                       (local_time->tm_mon + 1) * 100 +
                       local_time->tm_mday;
 
-    //cout << "Today's date: " << put_time(local_time, "%Y-%m-%d") << endl;
-    //cout << "getcurrentdate" << endl;
+    cout << "Today's date: " << currentDate << endl;
     return currentDate;
 }
 
@@ -50,8 +49,6 @@ int DateMethods::getCurrentMonthFirstDayDate()
     int currentMonthFirstDay = (local_time->tm_year + 1900) * 10000 +
                       (local_time->tm_mon + 1) * 100 + local_time->tm_mday;
 
-    //cout << "First day of current month: " << currentMonthFirstDay << endl;
-    //cout << "getCurrentMonthFirstDayDate" << endl;
 
     return currentMonthFirstDay;
 }
@@ -66,9 +63,6 @@ int DateMethods::getCurrentMonthLastDayDate()
     int currentMonthLastDay = (local_time->tm_year + 1900) * 10000 +
                       (local_time->tm_mon + 1) * 100 + local_time->tm_mday;
 
-    //cout << "Last day of current month: " << currentMonthLastDay << endl;
-    //cout << "getCurrentMonthLastDayDate" << endl;
-
     return currentMonthLastDay;
 }
 
@@ -82,9 +76,6 @@ int DateMethods::getPreviousMonthFirstDayDate()
     int previousMonthFirstDay = (local_time->tm_year + 1900) * 10000 +
                       (local_time->tm_mon) * 100 + local_time->tm_mday;
 
-    //cout << "First day of previous month: " << previousMonthFirstDay << endl;
-    //cout << "previousMonthFirstDay" << endl;
-
     return previousMonthFirstDay;
 }
 
@@ -96,10 +87,7 @@ int DateMethods::getPreviousMonthLastDayDate()
     local_time->tm_mday = calculateDaysInMonth(local_time->tm_year + 1900, local_time->tm_mon);
 
     int previousMonthLastDay = (local_time->tm_year + 1900) * 10000 +
-                      (local_time->tm_mon) * 100 + local_time->tm_mday;
-
-    //cout << "Last day of current month: " << previousMonthLastDay << endl;
-    //cout << "previousMonthLastDay" << endl;
+                      (local_time->tm_mon + 1) * 100 + local_time->tm_mday;
 
     return previousMonthLastDay;
 }
@@ -120,4 +108,32 @@ int DateMethods::calculateDaysInMonth(int year, int month)
     tm* end_of_month = localtime(&last_day_time);
 
     return end_of_month->tm_mday;
+}
+
+int DateMethods::convertStringDateToInt(const string &dateAsString)
+{
+    string formattedDate = dateAsString;
+    formattedDate.erase(remove(formattedDate.begin(), formattedDate.end(), '-'), formattedDate.end());
+
+    return stoi(formattedDate);
+}
+
+vector <Operation> DateMethods::sortVectorByDate(vector <Operation> &operations)
+{
+    sort(operations.begin(), operations.end(), [](const Operation& a, const Operation& b)
+    {
+        return a.date < b.date;
+    });
+
+    return operations;
+}
+
+string DateMethods::convertIntDateToStringWithDashes(int dateAsInt) {
+
+    string dateStr = to_string(dateAsInt);
+
+    dateStr.insert(4, "-");
+    dateStr.insert(7, "-");
+
+    return dateStr;
 }

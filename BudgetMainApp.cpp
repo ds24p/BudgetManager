@@ -22,11 +22,13 @@ void BudgetMainApp::loginUser()
     {
         budgetManager = new BudgetManager(INCOME_FILE_NAME, EXPENSE_FILE_NAME, userManager.getLoggedUserId());
     }
+    system("pause");
 }
 
 void BudgetMainApp::changeUserPassword()
 {
     userManager.changeUserPassword();
+    system("pause");
 }
 
 void BudgetMainApp::logoutUser()
