@@ -11,11 +11,6 @@ void BudgetManager::addIncome()
     incomes.push_back(income);
 
     cout << "Income added..." << endl;
-
-        cout << "ID: " << income.id << " UserID: " << income.userId
-                  << " Date: " << income.date << " Item: " << income.item
-                  << " Amount: " << income.amount << endl;
-
     system("pause");
 }
 
@@ -86,25 +81,23 @@ void BudgetManager::addExpense()
     expenses.push_back(expense);
 
     cout << "Expense added..." << endl;
-    for (const auto& op : expenses) {
-        cout << "ID: " << op.id << ", UserID: " << op.userId
-                  << ", Date: " << op.date << ", Item: " << op.item
-                  << ", Amount: " << op.amount << endl;
-    }
     system("pause");
 }
 
-double BudgetManager::printAndSumOperations(vector <Operation> &operations, int beginningOfPeriod, int endOfPeriod) //dodac optymalizacje bo wektor ktory dostaje jest przeciez posortowany
+double BudgetManager::printAndSumOperations(vector <Operation> &operations, int beginningOfPeriod, int endOfPeriod)
 {
     double sum = 0;
 
     for (int i = 0; i < operations.size(); i++)
     {
-
+        if (operations[i].date < beginningOfPeriod)
+        {
+            break;
+        }
         if (operations[i].date >= beginningOfPeriod && operations[i].date <= endOfPeriod)
         {
             cout << "ID: " << operations[i].id << " UserID: " << operations[i].userId
-                 << " Date: " << operations[i].date << " Item: " << operations[i].item
+                 << " Date: " << DateMethods::convertIntDateToStringWithDashes(operations[i].date) << " Item: " << operations[i].item
                  << " Amount: " << operations[i].amount << endl;
 
             sum += operations[i].amount;

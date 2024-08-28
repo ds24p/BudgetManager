@@ -25,7 +25,6 @@ bool DateMethods::validateDate(string &date)
     }
 }
 
-
 int DateMethods::getCurrentDate()
 {
     time_t now = time(nullptr);
@@ -35,7 +34,7 @@ int DateMethods::getCurrentDate()
                       (local_time->tm_mon + 1) * 100 +
                       local_time->tm_mday;
 
-    cout << "Today's date: " << currentDate << endl;
+    cout << "Today's date: " << convertIntDateToStringWithDashes(currentDate) << endl;
     return currentDate;
 }
 
@@ -122,7 +121,7 @@ vector <Operation> DateMethods::sortVectorByDate(vector <Operation> &operations)
 {
     sort(operations.begin(), operations.end(), [](const Operation& a, const Operation& b)
     {
-        return a.date < b.date;
+        return a.date > b.date;
     });
 
     return operations;

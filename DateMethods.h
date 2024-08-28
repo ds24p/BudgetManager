@@ -21,7 +21,7 @@ class DateMethods{
 public:
     bool validateDate(string &date);
     int convertStringDateToInt(const string &dateAsString);
-    string convertIntDateToStringWithDashes(int dateAsInt);
+    static string convertIntDateToStringWithDashes(int dateAsInt);
     int getCurrentDate();
     int getCurrentMonthFirstDayDate();
     int getCurrentMonthLastDayDate();
