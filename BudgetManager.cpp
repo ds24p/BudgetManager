@@ -3,13 +3,38 @@
 void BudgetManager::addIncome()
 {
     Operation income;
+    cout << "Adding a new income..." << endl;
+
+    income = addOperationDetails(INCOME);
+    incomeFile.addOperationToFile(income);
+
+    incomes.push_back(income);
+
+    cout << "Income added..." << endl;
+
+        cout << "ID: " << income.id << " UserID: " << income.userId
+                  << " Date: " << income.date << " Item: " << income.item
+                  << " Amount: " << income.amount << endl;
+
+    system("pause");
+}
+
+Operation BudgetManager::addOperationDetails(const Type &type)
+{
+    Operation operation;
     DateMethods methods;
 
-    income.id = incomeFile.lastId + 1;
-    income.userId = LOGGED_USER_ID;
-    int date;
+    if(type == INCOME)
+    {
+        operation.id = incomeFile.lastId + 1;
+    }
+    else if(type == EXPENSE)
+    {
+        operation.id = expenseFile.lastId + 1;
+    }
+
+    operation.userId = LOGGED_USER_ID;
     string sDate;
-    cout << "Adding a new income..." << endl;
     cout << "Add the operation with current date? y/n" << endl;
     char choice = Utils::getCharacter();
     while(!(choice == 'y' || choice == 'n'))
@@ -19,7 +44,7 @@ void BudgetManager::addIncome()
     }
     if (choice == 'y')
     {
-        date = methods.getCurrentDate();
+        operation.date = methods.getCurrentDate();
     }
     else if (choice == 'n')
     {
@@ -31,13 +56,11 @@ void BudgetManager::addIncome()
             cout << "Incorrect date. Try again: " << endl;
             sDate = Utils::readLine();
         }
-
-        sDate.erase(remove(sDate.begin(), sDate.end(), '-'), sDate.end());
-        date = stoi(sDate);
+        operation.date = methods.convertStringDateToInt(sDate);
     }
 
     cout << "Add the description of operation: ";
-    string item = Utils::readLine();
+    operation.item = Utils::readLine();
 
     cout << "Add the amount: ";
     string inputAmount = Utils::readLine();
@@ -46,119 +69,73 @@ void BudgetManager::addIncome()
         cout << "Wrong input. Give the correct number." << endl;
         inputAmount = Utils::readLine();
     }
-    double amount = stod(inputAmount);
 
-    incomeFile.addOperationToFile(income);
-    incomes.push_back(income);
-    cout << "Income added..." << endl;
-    system("pause");
+    operation.amount = stod(inputAmount);
+
+    return operation;
+
 }
 
 void BudgetManager::addExpense()
 {
     Operation expense;
-    DateMethods methods;
-
-    expense.id = expenseFile.lastId + 1;
-    expense.userId = LOGGED_USER_ID;
-    int date;
-    string sDate;
     cout << "Adding a new expense..." << endl;
-    cout << "Add the operation with current date? y/n" << endl;
-    char choice = Utils::getCharacter();
-    while(!(choice == 'y' || choice == 'n'))
-    {
-        cout << "Wrong input. Only input 'y' or 'n' is allowed." << endl;
-        choice = Utils::getCharacter();
-    }
-    if (choice == 'y')
-    {
-        date = methods.getCurrentDate();
-    }
-    else if (choice == 'n')
-    {
-        cout << "Give a date in form YYYY-MM-DD: ";
-        sDate = Utils::readLine();
 
-        while(!methods.validateDate(sDate))
-        {
-            cout << "Incorrect date. Try again: " << endl;
-            sDate = Utils::readLine();
-        }
-
-        sDate.erase(remove(sDate.begin(), sDate.end(), '-'), sDate.end());
-        date = stoi(sDate);
-    }
-
-    cout << "Add the description of operation: ";
-    string item = Utils::readLine();
-
-    cout << "Add the amount: ";
-        string inputAmount = Utils::readLine();
-    while(!Utils::isValidDouble(inputAmount))
-    {
-        cout << "Wrong input. Give the correct number." << endl;
-        inputAmount = Utils::readLine();
-    }
-    double amount = stod(inputAmount);
-
+    expense = addOperationDetails(EXPENSE);
     expenseFile.addOperationToFile(expense);
     expenses.push_back(expense);
+
     cout << "Expense added..." << endl;
+    for (const auto& op : expenses) {
+        cout << "ID: " << op.id << ", UserID: " << op.userId
+                  << ", Date: " << op.date << ", Item: " << op.item
+                  << ", Amount: " << op.amount << endl;
+    }
     system("pause");
+}
+
+double BudgetManager::printAndSumOperations(vector <Operation> &operations, int beginningOfPeriod, int endOfPeriod) //dodac optymalizacje bo wektor ktory dostaje jest przeciez posortowany
+{
+    double sum = 0;
+
+    for (int i = 0; i < operations.size(); i++)
+    {
+
+        if (operations[i].date >= beginningOfPeriod && operations[i].date <= endOfPeriod)
+        {
+            cout << "ID: " << operations[i].id << " UserID: " << operations[i].userId
+                 << " Date: " << operations[i].date << " Item: " << operations[i].item
+                 << " Amount: " << operations[i].amount << endl;
+
+            sum += operations[i].amount;
+        }
+    }
+    return sum;
 }
 
 void BudgetManager::showCurrentMonthBalance()
 {
     DateMethods dateMethods;
-    //do osobnej funkcji w Utils
-    sort(incomes.begin(), incomes.end(), [](const Operation& a, const Operation& b)
-    {
-        return a.date < b.date;
-    });
-    sort(expenses.begin(), expenses.end(), [](const Operation& a, const Operation& b)
-    {
-        return a.date < b.date;
-    });
+    int beginningOfPeriod = dateMethods.getCurrentMonthFirstDayDate();
+    int endOfPeriod = dateMethods.getCurrentMonthLastDayDate();
 
-    //do osobnej funkcji, ktora zwraca sume + dodac optymalizacje bo wektor ktory dostaje jest przeciez posortowany
+    cout << "INCOMES" << endl;
+    cout << "-------" << endl;
+    double incomeSum = printAndSumOperations(incomes, beginningOfPeriod, endOfPeriod);
+    incomes = dateMethods.sortVectorByDate(incomes);
 
-    double incomeSum = 0;
-    double expenseSum = 0;
+    cout << endl;
+    cout << "EXPENSES" << endl;
+    cout << "--------" << endl;
+    double expenseSum = printAndSumOperations(expenses, beginningOfPeriod, endOfPeriod);
+    expenses = dateMethods.sortVectorByDate(expenses);
 
-    for (int i = 0; i < incomes.size(); i++)
-    {
-
-        if (incomes[i].date >= dateMethods.getCurrentMonthFirstDayDate() && incomes[i].date <= dateMethods.getCurrentMonthLastDayDate())
-        {
-            //printuj i sumuj
-            cout << "ID: " << incomes[i].id << ", UserID: " << incomes[i].userId
-                 << ", Date: " << incomes[i].date << ", Item: " << incomes[i].item
-                 << ", Amount: " << incomes[i].amount << endl;
-
-            incomeSum += incomes[i].amount;
-        }
-    }
-
-    for (int i = 0; i < expenses.size(); i++)
-    {
-
-        if (expenses[i].date >= dateMethods.getCurrentMonthFirstDayDate() || expenses[i].date <= dateMethods.getCurrentMonthLastDayDate())
-        {
-            //printuj i sumuj
-            cout << "ID: " << expenses[i].id << ", UserID: " << expenses[i].userId
-                 << ", Date: " << expenses[i].date << ", Item: " << expenses[i].item
-                 << ", Amount: " << expenses[i].amount << endl;
-
-            expenseSum += expenses[i].amount;
-        }
-    }
-
+    cout << endl;
     cout << "THE GENERAL BALANCE FOR THIS MONTH" << endl;
     cout << "----------------------------------" << endl;
     cout << "Incomes: " << incomeSum << endl;
     cout << "Expenses: " << expenseSum << endl;
-    cout << "The general balance: " << incomeSum + expenseSum << endl;
+    cout << "The general balance: " << incomeSum - expenseSum << endl;
     system("pause");
 
 }
@@ -166,138 +143,84 @@ void BudgetManager::showCurrentMonthBalance()
 void BudgetManager::showPreviousMonthBalance()
 {
     DateMethods dateMethods;
-    //do osobnej funkcji w Utils
-    sort(incomes.begin(), incomes.end(), [](const Operation& a, const Operation& b)
-    {
-        return a.date < b.date;
-    });
-    sort(expenses.begin(), expenses.end(), [](const Operation& a, const Operation& b)
-    {
-        return a.date < b.date;
-    });
+    int beginningOfPeriod = dateMethods.getPreviousMonthFirstDayDate();
+    int endOfPeriod = dateMethods.getPreviousMonthLastDayDate();
 
-    //do osobnej funkcji, ktora zwraca sume + dodac optymalizacje bo wektor ktory dostaje jest przeciez posortowany
+    cout << "INCOMES" << endl;
+    cout << "-------" << endl;
+    double incomeSum = printAndSumOperations(incomes, beginningOfPeriod, endOfPeriod);
+    incomes = dateMethods.sortVectorByDate(incomes);
 
-    double incomeSum = 0;
-    double expenseSum = 0;
+    cout << endl;
+    cout << "EXPENSES" << endl;
+    cout << "--------" << endl;
+    double expenseSum = printAndSumOperations(expenses, beginningOfPeriod, endOfPeriod);
+    expenses = dateMethods.sortVectorByDate(expenses);
 
-    for (int i = 0; i < incomes.size(); i++)
-    {
-
-        if (incomes[i].date >= dateMethods.getPreviousMonthFirstDayDate() && incomes[i].date <= dateMethods.getPreviousMonthLastDayDate())
-        {
-            //printuj i sumuj
-            cout << "ID: " << incomes[i].id << ", UserID: " << incomes[i].userId
-                 << ", Date: " << incomes[i].date << ", Item: " << incomes[i].item
-                 << ", Amount: " << incomes[i].amount << endl;
-
-            incomeSum += incomes[i].amount;
-        }
-    }
-
-    for (int i = 0; i < expenses.size(); i++)
-    {
-
-        if (expenses[i].date > dateMethods.getPreviousMonthFirstDayDate() && expenses[i].date <= dateMethods.getPreviousMonthLastDayDate())
-        {
-            //printuj i sumuj
-            cout << "ID: " << expenses[i].id << ", UserID: " << expenses[i].userId
-                 << ", Date: " << expenses[i].date << ", Item: " << expenses[i].item
-                 << ", Amount: " << expenses[i].amount << endl;
-
-            incomeSum += expenses[i].amount;
-        }
-    }
-
+    cout << endl;
     cout << "THE GENERAL BALANCE FOR PREVIOUS MONTH" << endl;
-    cout << "----------------------------------" << endl;
+    cout << "--------------------------------------" << endl;
     cout << "Incomes: " << incomeSum << endl;
     cout << "Expenses: " << expenseSum << endl;
-    cout << "The general balance: " << incomeSum + expenseSum << endl;
+    cout << "The general balance: " << incomeSum - expenseSum << endl;
     system("pause");
 }
+
 void BudgetManager::showCustomPeriodBalance()
 {
-        string sDate = "";
-        int beginDate = 0;
-        int endDate = 0;
-        DateMethods methods;
+    string sDate = "";
+    int beginDate = 0;
+    int endDate = 0;
+    DateMethods methods;
 
-        cout << "Give a beginning date in form YYYY-MM-DD: ";
+    cout << "Give a beginning date in form YYYY-MM-DD: ";
+    sDate = Utils::readLine();
+
+    while(!methods.validateDate(sDate))
+    {
+        cout << "Incorrect date. Try again: " << endl;
         sDate = Utils::readLine();
+    }
+    beginDate = methods.convertStringDateToInt(sDate);
 
-        while(!methods.validateDate(sDate))
-        {
-            cout << "Incorrect date. Try again: " << endl;
-            sDate = Utils::readLine();
-        }
+    cout << "Give an end date in form YYYY-MM-DD: ";
+    sDate = Utils::readLine();
 
-        sDate.erase(remove(sDate.begin(), sDate.end(), '-'), sDate.end());
-        beginDate = stoi(sDate);
-
-        cout << "Give an end date in form YYYY-MM-DD: ";
+    while(!methods.validateDate(sDate))
+    {
+        cout << "Incorrect date. Try again: " << endl;
         sDate = Utils::readLine();
+    }
 
-        while(!methods.validateDate(sDate))
-        {
-            cout << "Incorrect date. Try again: " << endl;
-            sDate = Utils::readLine();
-        }
-
-        sDate.erase(remove(sDate.begin(), sDate.end(), '-'), sDate.end());
-        endDate = stoi(sDate);
-
-        if (endDate > beginDate)
+    endDate = methods.convertStringDateToInt(sDate);
+    if (endDate < beginDate)
     {
         cout << "The beginning date is later than end date. Correct your input and try again" << endl;
+        system("pause");
     }
     else
     {
-        sort(incomes.begin(), incomes.end(), [](const Operation& a, const Operation& b)
-        {
-            return a.date < b.date;
-        });
-        sort(expenses.begin(), expenses.end(), [](const Operation& a, const Operation& b)
-        {
-            return a.date < b.date;
-        });
+        incomes = methods.sortVectorByDate(incomes);
+        expenses = methods.sortVectorByDate(expenses);
 
-        double incomeSum = 0;
-        double expenseSum = 0;
+        cout << endl;
+        cout << "INCOMES" << endl;
+        cout << "-------" << endl;
+        double incomeSum = printAndSumOperations(incomes, beginDate, endDate);
+        incomes = methods.sortVectorByDate(incomes);
 
-        for (int i = 0; i < incomes.size(); i++)
-        {
+        cout << endl;
+        cout << "EXPENSES" << endl;
+        cout << "--------" << endl;
+        double expenseSum = printAndSumOperations(expenses, beginDate, endDate);
+        expenses = methods.sortVectorByDate(expenses);
 
-            if (incomes[i].date >= beginDate && incomes[i].date <= endDate)
-            {
-                //printuj i sumuj
-                cout << "ID: " << incomes[i].id << ", UserID: " << incomes[i].userId
-                     << ", Date: " << incomes[i].date << ", Item: " << incomes[i].item
-                     << ", Amount: " << incomes[i].amount << endl;
-
-                incomeSum += incomes[i].amount;
-            }
-        }
-
-        for (int i = 0; i < expenses.size(); i++)
-        {
-
-            if (expenses[i].date >= beginDate && expenses[i].date <= endDate)
-            {
-                //printuj i sumuj
-                cout << "ID: " << expenses[i].id << ", UserID: " << expenses[i].userId
-                     << ", Date: " << expenses[i].date << ", Item: " << expenses[i].item
-                     << ", Amount: " << expenses[i].amount << endl;
-
-                incomeSum += expenses[i].amount;
-            }
-        }
-
-        cout << "THE GENERAL BALANCE FOR " << beginDate << " - " << endDate << endl;
-        cout << "----------------------------------" << endl;
+        cout << endl;
+        cout << "THE GENERAL BALANCE FOR " << methods.convertIntDateToStringWithDashes(beginDate) << " - " << methods.convertIntDateToStringWithDashes(endDate) << endl;
+        cout << "-----------------------------------------------" << endl;
         cout << "Incomes: " << incomeSum << endl;
         cout << "Expenses: " << expenseSum << endl;
-        cout << "The general balance: " << incomeSum + expenseSum << endl;
+        cout << "The general balance: " << incomeSum - expenseSum << endl;
         system("pause");
     }
 }

@@ -19,7 +19,7 @@ bool OperationFile::addOperationToFile (const Operation &operation)
     xml.AddElem("userId", operation.userId);
     xml.AddElem("date", operation.date);
     xml.AddElem("item", operation.item);
-    xml.AddElem("amount", operation.amount);
+    xml.AddElem("amount", to_string(operation.amount));
 
     xml.OutOfElem();
 
@@ -37,10 +37,11 @@ vector <Operation> OperationFile::loadOperationsFromFile(const int loggedUserId)
 {
     vector <Operation> operations;
     CMarkup xml;
+    string fileName = getFileName();
 
-    if (!xml.Load(getFileName())) {
-        cout << "Failed to load file: " << getFileName() << endl;
-        cout << "(Probably no registered operations so far)." << endl;
+    if (!xml.Load(fileName)) {
+        cout << "Failed to load file: " << fileName;
+        cout << " (Probably no registered operations so far)." << endl;
         return operations;
     }
 

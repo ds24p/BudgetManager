@@ -10,6 +10,27 @@ int main()
 {
     BudgetMainApp mainApp("users.xml", "incomes.xml", "expenses.xml");
 
+    /*UserFile usFile("users.xml");
+    vector <User> users = usFile.loadUsersFromFile();
+
+    for (const auto& op : users) {
+
+        cout << "ID: " << op.id << ", FirstName: " << op.firstName
+                  << ", lastName: " << op.lastName << ", login: " << op.login
+                  << ", password: " << op.password << endl;
+    }
+
+
+    OperationFile file("incomes.xml");
+    //app.addIncome();
+
+     vector <Operation> operations = file.loadOperationsFromFile(1);
+
+     for (const auto& op : operations) {
+        cout << "ID: " << op.id << ", UserID: " << op.userId
+                  << ", Date: " << op.date << ", Item: " << op.item
+                  << ", Amount: " << op.amount << endl;
+    } */
     char mainMenuChoice = '0';
     char usersMenuChoice = '0';
 

@@ -11,7 +11,8 @@ class File{
     const string FILE_NAME;
 
 public:
-    File (string fileName) : FILE_NAME(fileName){};
+    File (string fileName) : FILE_NAME(fileName){
+        lastId = 0; };
 
     int lastId;
     string getFileName();

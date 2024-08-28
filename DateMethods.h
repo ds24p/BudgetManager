@@ -7,6 +7,8 @@
 #include <iomanip>
 #include <string>
 #include <cstdlib>
+#include <algorithm>
+#include <vector>
 
 #include "Operation.h"
 
@@ -14,7 +16,6 @@ using namespace std;
 
 class DateMethods{
 
-    void calculateCurrentDate(map<string, int> &currentDate);
     int isYearLeap(int year);
 
 public:
@@ -27,6 +28,7 @@ public:
     int getPreviousMonthLastDayDate();
     int getPreviousMonthFirstDayDate();
     int calculateDaysInMonth(int year, int month);
+    vector <Operation> sortVectorByDate(vector <Operation> &operations);
 
 };
 

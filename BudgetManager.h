@@ -35,7 +35,7 @@ public:
     BudgetManager (string incomeFileName, string expenseFileName, int loggedUserId) : incomeFile(incomeFileName), expenseFile(expenseFileName), LOGGED_USER_ID(loggedUserId)
     {
 
-        this->incomes = incomeFile.loadOperationsFromFile(LOGGED_USER_ID); //przeniesc do konstruktora OperationFile
+        this->incomes = incomeFile.loadOperationsFromFile(LOGGED_USER_ID);
         this->expenses = expenseFile.loadOperationsFromFile(LOGGED_USER_ID);
     };
     void addIncome();
@@ -43,6 +43,7 @@ public:
     void showCurrentMonthBalance();
     void showPreviousMonthBalance();
     void showCustomPeriodBalance();
+    double printAndSumOperations(vector <Operation> &operations, int beginningOfPeriod, int endOfPeriod);
     };
 
 

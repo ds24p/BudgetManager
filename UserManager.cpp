@@ -5,15 +5,22 @@ User UserManager::enterUserData()
 {
     User newUser;
     newUser.id = users.size() + 1;
+    cout << "Enter first name: " << endl;
+    cout << "Name: ";
     newUser.firstName = Utils::readLine();
+    cout << "Enter surname: " << endl;
+    cout << "Surname: ";
     newUser.lastName = Utils::readLine();
     string login;
     do
     {
         cout << "Create unique User Login: " << endl;
+        cout << "Login: ";
         login = Utils::readLine();
     } while(checkIfLoginExist(login));
     newUser.login = login;
+    cout << "Create password:" << endl;
+    cout << "Password: ";
     newUser.password = Utils::readLine();
     return newUser;
 }
@@ -30,13 +37,13 @@ void UserManager::registerUser(){
 
 void UserManager::loginUser()
 {
-    cout << "Enter login: " << endl;
+    cout << "Enter login: ";
         string login = Utils::readLine();
         if(checkIfLoginExist(login))
         {
             for (int i = 0; i < users.size(); i++) {
                 if (users[i].login == login) {
-                        cout << "Enter password" << endl;
+                        cout << "Enter password: ";
                         string password = Utils::readLine();
                         if(users[i].password == password)
                         {
